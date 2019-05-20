@@ -29,10 +29,19 @@ class Employee extends React.Component{
 
     render()
     {
+        let btnName = '';
+        if(this.state.isSaveBtnClicked)
+        {
+            btnName = 'Go To List';
+        }
+        else{
+            btnName = "Add";
+        }
         return(
             <div>
                 <h1>Employee Info</h1>
-                {!this.state.isSaveBtnClicked && <button onClick={this.onClick}>Add</button>}
+                
+                {!this.state.isSaveBtnClicked && <button onClick={this.onClick}>{btnName}</button>}
                 {this.state.isSaveBtnClicked && <EmployeeForm />}
                 {!this.state.isSaveBtnClicked && <EmployeeList />}
             </div>
