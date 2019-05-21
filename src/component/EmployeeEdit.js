@@ -41,6 +41,7 @@ class EmployeeEdit extends React.Component{
     {
         return(
             <div>
+                <h3>Edit</h3>
                 <form onSubmit={this.onSubmit}>
                     <label>First Name</label> <br />
                     <input required type="text" ref={(input) => this.getFirstName=input} /><br />

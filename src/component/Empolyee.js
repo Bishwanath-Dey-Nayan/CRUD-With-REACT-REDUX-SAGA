@@ -13,11 +13,11 @@ class Employee extends React.Component{
        super(props)
        this.state = {
            isSaveBtnClicked:false,
-           isEditBtnClicked:false,
+           
        }
        this.onClick = this.onClick.bind(this);
        this.Add = this.Add.bind(this);
-       this.editBtn = this.editBtn(this);
+      
 
     }
 
@@ -26,37 +26,25 @@ class Employee extends React.Component{
         this.setState({isSaveBtnClicked:false});
     }
 
-    editBtn()
-    {
-        this.setState({isEditBtnClicked:true});
-    }
 
 
     onClick(e) 
     {
-        console.log("inside on click");
-        const isSaveBtnClicked = !this.state.isSaveBtnClicked;
+       
+        const isSaveBtnClicked = true;
         this.setState({isSaveBtnClicked});
-        console.log(this.state.isSaveBtnClicked);
-
+       
     }
 
     render()
     {
-        let btnName = '';
-        if(this.state.isSaveBtnClicked)
-        {
-            btnName = 'Go To List';
-        }
-        else{
-            btnName = "Add";
-        }
+    
         return(
             <div>
                 <h1>Employee Info</h1>
                 
-                {(!this.state.isSaveBtnClicked && !this.props.isEditBtnClicked) && <button onClick={this.onClick}>{btnName}</button>}
-                {(this.state.isSaveBtnClicked && this.props.isEditBtnClicked) && <EmployeeForm  AddClicked={this.Add}/>}
+                {(!this.state.isSaveBtnClicked && !this.props.isEditBtnClicked) && <button onClick={this.onClick}>Save</button>}
+                {(this.state.isSaveBtnClicked || this.props.isEditBtnClicked) && <EmployeeForm  AddClicked={this.Add}/>}
                 {!this.state.isSaveBtnClicked && <EmployeeList EditClicked={this.editBtn}/>}
                 { this.props.isEditBtnClicked && <EmployeeEdit />}
                 
