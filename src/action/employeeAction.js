@@ -1,10 +1,17 @@
-import {FETCH_EMPLOYEES,ADD_EMPLOYEE, EDIT_EMPLOYEE, DELETE_EMPLOYEE, EDIT_MODE} from './type';
+import {FETCH_EMPLOYEES,ADD_EMPLOYEE, EDIT_EMPLOYEE, DELETE_EMPLOYEE, EDIT_MODE, FETCH_EMPLOYEE_BY_ID} from './type';
 
 
 
 export const fetchEmployees = ()=>({
     type:FETCH_EMPLOYEES
 });
+
+export const fetchEmployeesById = (id) =>(
+    {
+        type:FETCH_EMPLOYEE_BY_ID,
+        payload:id
+    }
+)
 
 
 export const addEmployee = (employee)=>
@@ -16,7 +23,9 @@ export const addEmployee = (employee)=>
 )
 
 export const editEmployee = (employee) =>
-({
+(
+    {
+    
     type:EDIT_EMPLOYEE,
     payload:employee
 

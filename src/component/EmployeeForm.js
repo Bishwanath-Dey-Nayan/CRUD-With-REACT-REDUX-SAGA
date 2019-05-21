@@ -32,7 +32,7 @@ class EmployeeForm extends React.Component
     {
         return(
             <div>
-               
+               <h3>Add Employee</h3>
                  <br />
                 <form onSubmit={this.onSubmit}>
                     <label>First Name</label> <br />

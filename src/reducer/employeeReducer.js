@@ -48,7 +48,17 @@ export default function (state = initialState, action)
                 ...state,
                 isEditBtnClicked:true
             }
+        case FETCH_EMPLOYEE_BY_ID:
+            return{
+                ...state,
+                employee:state.employees.find((emp) => emp.ID===action.payload)
+            }
 
+        case EDIT_EMPLOYEE_ASYNC:
+            return{
+              ...state,
+              employee:action.payload  
+            }
         default:
             return state;    
         }

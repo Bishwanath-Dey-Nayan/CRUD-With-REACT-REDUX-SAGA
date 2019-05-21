@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchEmployees,deleteEmployee,editMode} from '../action/employeeAction';
+import {fetchEmployees,deleteEmployee,editMode,fetchEmployeesById} from '../action/employeeAction';
 
 
 class EmployeeList extends React.Component{
@@ -13,7 +13,9 @@ class EmployeeList extends React.Component{
     onEdit = (empID) =>
     {
         console.log(empID);
+
         this.props.editMode();
+        this.props.fetchEmployeesById(empID);
 
     }
 
@@ -77,5 +79,6 @@ const mapStateToProps = (state)=>
 export default connect(mapStateToProps,{
     fetchEmployees,
     deleteEmployee,
-    editMode
+    editMode,
+    fetchEmployeesById
 })(EmployeeList);
