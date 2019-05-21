@@ -14,7 +14,8 @@ const initialState = {
     employee:{},
     editMode:false,
     error:false,
-    isSaveBtnClicked:false
+    isSaveBtnClicked:false,
+    isEditBtnClicked:false
 }
 
 export default function (state = initialState, action)
@@ -36,6 +37,17 @@ export default function (state = initialState, action)
                 ...state,
                 employees:state.employees.concat([action.payload])
             } 
+        case DELETE_EMPLOYEE_ASYNC:
+            return{
+                ...state,
+                employees:state.employees.filter((employee) => employee.ID !== action.payload)
+            }
+
+        case EDIT_MODE:
+            return{
+                ...state,
+                isEditBtnClicked:true
+            }
 
         default:
             return state;    

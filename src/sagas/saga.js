@@ -1,12 +1,16 @@
 import {takeEvery,call,put} from 'redux-saga/effects';
-import {FETCH_EMPLOYEES, FETCH_EMPLOYEES_ASYNC, FETCH_EMPLOYEES_ASYNC_ERROR,ADD_EMPLOYEE,ADD_EMPLOYEE_ASYNC} from '../action/type';
+import {FETCH_EMPLOYEES, FETCH_EMPLOYEES_ASYNC, FETCH_EMPLOYEES_ASYNC_ERROR,ADD_EMPLOYEE,ADD_EMPLOYEE_ASYNC,EDIT_EMPLOYEE,DELETE_EMPLOYEE, DELETE_EMPLOYEE_ASYNC} from '../action/type';
 import {fetchEmployees} from './api';
+
 
 
 export default function* rootWatcher()
 {
     yield takeEvery(FETCH_EMPLOYEES,fetchEmployeeAsync);
     yield takeEvery(ADD_EMPLOYEE,addEmployeeAsync);
+    yield takeEvery(EDIT_EMPLOYEE,editEmployeeAsync);
+    yield takeEvery(DELETE_EMPLOYEE,deleteEmployeeAsync);
+
 }
 
 function* fetchEmployeeAsync(){
@@ -35,4 +39,23 @@ function* addEmployeeAsync(action)
 
     yield put({type:ADD_EMPLOYEE_ASYNC,payload:apiResult});
     
+}
+
+function* editEmployeeAsync()
+{
+
+}
+
+function* deleteEmployeeAsync(action)
+{
+    const apiResult = yield fetch('http://localhost:56293/api/Employee/'+ action.payload, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'Accept': "application/json"
+        }     
+    })
+    .then(response => response.json())
+    .then((employees) =>{return employees})
+    yield put({type: DELETE_EMPLOYEE_ASYNC, payload: action.payload});
 }

@@ -1,11 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchEmployees} from '../action/employeeAction';
+import {fetchEmployees,deleteEmployee,editMode} from '../action/employeeAction';
+
 
 class EmployeeList extends React.Component{
     componentDidMount()
     {
         this.props.fetchEmployees();
+    }
+
+
+    onEdit = (empID) =>
+    {
+        console.log(empID);
+        this.props.editMode();
+
+    }
+
+    onDelete = (empID) =>
+    {
+        this.props.deleteEmployee(empID);
     }
 
 
@@ -24,6 +38,7 @@ class EmployeeList extends React.Component{
                         <th>LastName</th>
                         <th>Gender</th>
                         <th>Salary</th>
+                        <th>Action</th>
                       
                         
                     </tr>
@@ -37,6 +52,8 @@ class EmployeeList extends React.Component{
                            <td>{u.LastName}</td>
                            <td>{u.Gender}</td>
                            <td>{u.Salary}</td>
+                           <td><button onClick={() =>this.onEdit(u.ID)}>Edit</button></td>
+                           <td><button onClick={()=>this.onDelete(u.ID)}>Delete</button></td>
                        </tr>
                    )}
                </tbody>
@@ -58,5 +75,7 @@ const mapStateToProps = (state)=>
 )
 
 export default connect(mapStateToProps,{
-    fetchEmployees
+    fetchEmployees,
+    deleteEmployee,
+    editMode
 })(EmployeeList);

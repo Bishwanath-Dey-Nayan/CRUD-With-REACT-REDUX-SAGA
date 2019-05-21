@@ -1,12 +1,22 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {addEmployee} from '../action/employeeAction';
+import { connect } from 'react-redux';
+import {editEmployee} from '../action/employeeAction';
 
-class EmployeeForm extends React.Component
-{
-    
 
-     onSubmit = (e) =>
+class EmployeeEdit extends React.Component{
+    constructor(props)
+    {
+        super(props);
+        this.state = 
+        {
+            FirstName: '',
+            LastName : '',
+            Gender : '',
+            Salary : ''
+        }
+    }
+
+    onSubmit = (e) =>
     {
         e.preventDefault();
         const FirstName = this.getFirstName.value;
@@ -21,19 +31,16 @@ class EmployeeForm extends React.Component
             Salary
         }
 
-        this.props.addEmployee(employee);
-        this.props.AddClicked();
+        editEmployee(employee);
+
+       
         
     }
-
-
 
     render()
     {
         return(
             <div>
-               
-                 <br />
                 <form onSubmit={this.onSubmit}>
                     <label>First Name</label> <br />
                     <input required type="text" ref={(input) => this.getFirstName=input} /><br />
@@ -45,8 +52,8 @@ class EmployeeForm extends React.Component
                     <option value = "Female">Female</option>
                     </select><br />
                     <label>Salary</label><br />
-                    <input required type="number" ref={(input) => this.getSalary=input} /><br />
-                    <button >Add</button>
+                    <input required type="number" ref={(input) => this.getSalary=input}/><br />
+                    <button >Edit</button>
                 </form>
             </div>
         );
@@ -56,4 +63,4 @@ class EmployeeForm extends React.Component
 
 
 
-export default connect(null,{addEmployee})(EmployeeForm)
+export default connect(null,{})(EmployeeEdit);
