@@ -1,4 +1,4 @@
-import {FETCH_EMPLOYEES,ADD_EMPLOYEE, EDIT_EMPLOYEE, DELETE_EMPLOYEE, EDIT_MODE, FETCH_EMPLOYEE_BY_ID} from './type';
+import {FETCH_EMPLOYEES,ADD_EMPLOYEE, EDIT_EMPLOYEE, DELETE_EMPLOYEE, EDIT_MODE, FETCH_EMPLOYEE_BY_ID,ADD_EMPLOYEE_BUTTON_CLICKED} from './type';
 
 
 
@@ -43,5 +43,12 @@ export const editMode = () =>
 (
     {
         type:EDIT_MODE
+    }
+)
+
+export const addEmployeeBtnClicked = () =>
+(
+    {
+        type:ADD_EMPLOYEE_BUTTON_CLICKED
     }
 )

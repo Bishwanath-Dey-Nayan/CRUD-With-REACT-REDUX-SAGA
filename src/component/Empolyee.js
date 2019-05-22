@@ -3,6 +3,7 @@ import EmployeeList from './EmployeeList';
 import EmployeeForm from './EmployeeForm';
 import EmployeeEdit from './EmployeeEdit';
 import {connect} from 'react-redux';
+import {addEmployeeBtnClicked} from '../action/employeeAction';
 
 
 
@@ -33,19 +34,23 @@ class Employee extends React.Component{
        
         const isSaveBtnClicked = true;
         this.setState({isSaveBtnClicked});
+        this.props.addEmployeeBtnClicked();
        
     }
 
+
     render()
     {
-    
+ 
         return(
             <div>
                 <h1>Employee Info</h1>
+                {this.props.edit === true &&<h3 className='alert alert-success'>Data Edited Successfully</h3>}
                 
-                {(!this.state.isSaveBtnClicked && !this.props.isEditBtnClicked) && <button onClick={this.onClick}>Save</button>}
-                {(this.state.isSaveBtnClicked || this.props.isEditBtnClicked) && <EmployeeForm  AddClicked={this.Add}/>}
-                {!this.state.isSaveBtnClicked && <EmployeeList EditClicked={this.editBtn}/>}
+                {(this.state.isSaveBtnClicked===false && this.props.isEditBtnClicked===false) && <button className='btn btn-primary' onClick={this.onClick}>Add Employee</button>}
+                <br /><br/>
+                {(this.state.isSaveBtnClicked===true) && <EmployeeForm  AddClicked={this.Add}/>}
+                {(this.state.isSaveBtnClicked===false && this.props.isEditBtnClicked===false) && <EmployeeList EditClicked={this.editBtn}/>}
                 { this.props.isEditBtnClicked && <EmployeeEdit />}
                 
             </div>
@@ -56,8 +61,10 @@ class Employee extends React.Component{
 const mapStateToProps = (state) =>
 (
 {
-    isEditBtnClicked:state.employeeReducer.isEditBtnClicked
+    isEditBtnClicked:state.employeeReducer.isEditBtnClicked,
+    edit:state.employeeReducer.edit
+
 }
 )
 
-export default connect(mapStateToProps)(Employee);
+export default connect(mapStateToProps,{addEmployeeBtnClicked})(Employee);

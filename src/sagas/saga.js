@@ -1,5 +1,5 @@
-import {takeEvery,call,put} from 'redux-saga/effects';
-import {FETCH_EMPLOYEES, FETCH_EMPLOYEES_ASYNC, FETCH_EMPLOYEES_ASYNC_ERROR,ADD_EMPLOYEE,ADD_EMPLOYEE_ASYNC,EDIT_EMPLOYEE,DELETE_EMPLOYEE, DELETE_EMPLOYEE_ASYNC, EDIT_EMPLOYEE_ASYNC} from '../action/type';
+import {takeEvery,call,put,delay} from 'redux-saga/effects';
+import {FETCH_EMPLOYEES,EDITED, FETCH_EMPLOYEES_ASYNC, FETCH_EMPLOYEES_ASYNC_ERROR,ADD_EMPLOYEE,ADD_EMPLOYEE_ASYNC,EDIT_EMPLOYEE,DELETE_EMPLOYEE, DELETE_EMPLOYEE_ASYNC, EDIT_EMPLOYEE_ASYNC} from '../action/type';
 import {fetchEmployees} from './api';
 
 
@@ -35,7 +35,7 @@ function* addEmployeeAsync(action)
         body:JSON.stringify(action.payload)
     })
     .then(res => res.json())
-    .then(employee => {return employee})
+    .then(employee => {return employee});
 
     yield put({type:ADD_EMPLOYEE_ASYNC,payload:apiResult});
     
@@ -53,10 +53,12 @@ function* editEmployeeAsync(action)
      body:JSON.stringify(action.payload)
     })
     .then(res => res.json())
-    .then((emp) =>{return emp;} )
+    .then((emp) =>{return emp;} );
+
     yield put({type:EDIT_EMPLOYEE_ASYNC,payload:apiResult});
     const data = yield call(fetchEmployees);    
     yield put({ type: FETCH_EMPLOYEES_ASYNC, payload: data })
+    
     
 }
 

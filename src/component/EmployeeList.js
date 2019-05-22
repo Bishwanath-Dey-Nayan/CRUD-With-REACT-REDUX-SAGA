@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchEmployees,deleteEmployee,editMode,fetchEmployeesById} from '../action/employeeAction';
+import '../../src/App.css';
 
 
 class EmployeeList extends React.Component{
@@ -31,8 +32,8 @@ class EmployeeList extends React.Component{
         console.log(employees);
        
             return(
-                <div>
-                     <table>
+                <div className='App'>
+                     <table className='table table-dark'>
                 <thead>
                     <tr>
                         <th>User ID</th>
@@ -40,7 +41,8 @@ class EmployeeList extends React.Component{
                         <th>LastName</th>
                         <th>Gender</th>
                         <th>Salary</th>
-                        <th>Action</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                       
                         
                     </tr>
@@ -54,8 +56,8 @@ class EmployeeList extends React.Component{
                            <td>{u.LastName}</td>
                            <td>{u.Gender}</td>
                            <td>{u.Salary}</td>
-                           <td><button onClick={() =>this.onEdit(u.ID)}>Edit</button></td>
-                           <td><button onClick={()=>this.onDelete(u.ID)}>Delete</button></td>
+                           <td><button  onClick={() =>this.onEdit(u.ID)}>Edit</button></td>
+                           <td><button  onClick={()=>this.onDelete(u.ID)}>Delete</button></td>
                        </tr>
                    )}
                </tbody>

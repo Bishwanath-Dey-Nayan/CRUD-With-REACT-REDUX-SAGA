@@ -60,35 +60,45 @@ class EmployeeEdit extends React.Component{
     {
         console.log(this.state);
         return(
-            <div>
+            <div className='container'>
                 <h3>Edit</h3>
-                <form onSubmit={this.onSubmit}>
-                    <label>First Name</label> <br />
-                    <input required type="text" 
+                
+                <form onSubmit={this.onSubmit} className='form'>
+                    <div className='form-group'>
+                    <label>First Name</label>
+                    <input required type="text"
+                    className='form-control' 
                     value={this.state.FirstName}
                      onChange={(e)=>{this.setState({FirstName:e.target.value})}} />
-                     <br />
+                     </div>
+                     <div className='form-group'>
                     <label>Last Name</label><br />
                     <textarea required
+                    className='form-control'
                      value={this.state.LastName}
                      onChange={(e)=>{this.setState({LastName:e.target.value})}}
                      />
-                      <br />
+                    </div>
+                    <div className='form-group'>
                     <select ref={(input) => this.getGender=input}
+                    className='form-control form-control-lg'
                     onChange={(e)=>{this.setState({Gender:e.target.value})}} 
                     value={this.state.Gender} 
                     required>
                     <option value="" disabled selected>Choose a salutation ...</option>
                     <option value = "Male">Male</option>
                     <option value = "Female">Female</option>
-                    </select><br />
+                    </select>
+                    </div>
+                    <div className='form-group'>
                     <label>Salary</label><br />
                     <input required type="number"
+                     className='form-control'
                      value={this.state.Salary}
                      onChange={(e)=>{this.setState({Salary:e.target.value})}}
                      />
-                     <br />
-                    <button >Edit</button>
+                     </div>
+                    <button className='btn btn-primary' >Edit</button>
                 </form>
             </div>
         );
@@ -99,7 +109,8 @@ class EmployeeEdit extends React.Component{
 const mapStateToProps = (state) =>
 (
     {
-        employee:state.employeeReducer.employee
+        employee:state.employeeReducer.employee,
+        
     }
 )
 

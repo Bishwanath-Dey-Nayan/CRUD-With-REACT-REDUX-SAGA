@@ -6,5 +6,5 @@ export const fetchEmployees = () => (
         }
     })
         .then(response => response.json())
-        .then(names => names, error => "json failed" )
+        .then(emp => emp, error => "json failed" )
   )

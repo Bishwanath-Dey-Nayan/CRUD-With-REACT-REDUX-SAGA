@@ -6,7 +6,8 @@ import {
     ADD_EMPLOYEE_ASYNC,
     EDIT_EMPLOYEE_ASYNC,
     DELETE_EMPLOYEE_ASYNC,
-    FETCH_EMPLOYEES_ASYNC_ERROR
+    FETCH_EMPLOYEES_ASYNC_ERROR,
+    EDITED,ADD_EMPLOYEE_BUTTON_CLICKED
 } from '../action/type';
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
     editMode:false,
     error:false,
     isSaveBtnClicked:false,
-    isEditBtnClicked:false
+    isEditBtnClicked:false,
+    edit:false
 }
 
 export default function (state = initialState, action)
@@ -24,7 +26,8 @@ export default function (state = initialState, action)
         case FETCH_EMPLOYEES_ASYNC:
             return{
                 ...state,
-                employees: action.payload
+                employees: action.payload,
+                
             }
 
         case FETCH_EMPLOYEES_ASYNC_ERROR:
@@ -35,12 +38,14 @@ export default function (state = initialState, action)
         case ADD_EMPLOYEE_ASYNC:
             return{
                 ...state,
-                employees:state.employees.concat([action.payload])
+                employees:state.employees.concat([action.payload]),
+                edit:false
             } 
         case DELETE_EMPLOYEE_ASYNC:
             return{
                 ...state,
-                employees:state.employees.filter((employee) => employee.ID !== action.payload)
+                employees:state.employees.filter((employee) => employee.ID !== action.payload),
+                edit:false
             }
 
         case EDIT_MODE:
@@ -57,7 +62,18 @@ export default function (state = initialState, action)
         case EDIT_EMPLOYEE_ASYNC:
             return{
               ...state,
-              employee:action.payload  
+              employee:action.payload,
+              isEditBtnClicked:false,
+              edit:true 
+            }
+        case EDITED:
+            return{
+                ...state,
+                edit:true
+            }
+        case ADD_EMPLOYEE_BUTTON_CLICKED:
+            return{
+                edit:false
             }
         default:
             return state;    
